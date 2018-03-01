@@ -21,6 +21,7 @@ namespace Microsoft.AspNetCore.Blazor.Build
             IEnumerable<string> assemblyReferences,
             IEnumerable<string> jsReferences,
             IEnumerable<string> cssReferences,
+            string reloadUri,
             string outputPath)
         {
             var template = GetTemplate(path);
@@ -30,7 +31,7 @@ namespace Microsoft.AspNetCore.Blazor.Build
             }
             var assemblyName = Path.GetFileNameWithoutExtension(assemblyPath);
             var entryPoint = GetAssemblyEntryPoint(assemblyPath);
-            var updatedContent = GetIndexHtmlContents(template, assemblyName, entryPoint, assemblyReferences, jsReferences, cssReferences);
+            var updatedContent = GetIndexHtmlContents(template, assemblyName, entryPoint, assemblyReferences, jsReferences, cssReferences, reloadUri);
             var normalizedOutputPath = Normalize(outputPath);
             Console.WriteLine("Writing index to: " + normalizedOutputPath);
             File.WriteAllText(normalizedOutputPath, updatedContent);
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.Blazor.Build
             string assemblyEntryPoint,
             IEnumerable<string> assemblyReferences,
             IEnumerable<string> jsReferences,
-            IEnumerable<string> cssReferences)
+            IEnumerable<string> cssReferences,
+            string reloadUri)
         {
             var resultBuilder = new StringBuilder();
 
@@ -141,7 +143,8 @@ namespace Microsoft.AspNetCore.Blazor.Build
                                     assemblyName,
                                     assemblyEntryPoint,
                                     assemblyReferences,
-                                    tag.Attributes);
+                                    tag.Attributes,
+                                    reloadUri);
 
                                 // Emit tags to reference any specified JS/CSS files
                                 AppendReferenceTags(
@@ -198,7 +201,8 @@ namespace Microsoft.AspNetCore.Blazor.Build
             string assemblyName,
             string assemblyEntryPoint,
             IEnumerable<string> binFiles,
-            List<KeyValuePair<string, string>> attributes)
+            List<KeyValuePair<string, string>> attributes,
+            string reloadUri)
         {
             var assemblyNameWithExtension = $"{assemblyName}.dll";
 
@@ -210,6 +214,11 @@ namespace Microsoft.AspNetCore.Blazor.Build
             attributesDict["main"] = assemblyNameWithExtension;
             attributesDict["entrypoint"] = assemblyEntryPoint;
             attributesDict["references"] = referencesAttribute;
+
+            if (!string.IsNullOrEmpty(reloadUri))
+            {
+                attributesDict["reload"] = reloadUri;
+            }
 
             resultBuilder.Append("<script");
             foreach (var attributePair in attributesDict)
