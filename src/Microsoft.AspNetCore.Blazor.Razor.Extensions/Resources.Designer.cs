@@ -61,6 +61,51 @@ namespace Microsoft.AspNetCore.Blazor.Razor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Binds the provided expression to the &apos;{0}&apos; property and a change handler delegate to the &apos;{1}&apos; property of the component..
+        /// </summary>
+        internal static string BindTagHelper_Component_Documentation {
+            get {
+                return ResourceManager.GetString("BindTagHelper_Component_Documentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft.AspNetCore.Blazor.Bind.
+        /// </summary>
+        internal static string BindTagHelper_Element_DisplayName {
+            get {
+                return ResourceManager.GetString("BindTagHelper_Element_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Binds the provided expression to the &apos;{0}&apos; attribute and a change handler delegate to the &apos;{1}&apos; attribute..
+        /// </summary>
+        internal static string BindTagHelper_Element_Documentation {
+            get {
+                return ResourceManager.GetString("BindTagHelper_Element_Documentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft.AspNetCore.Blazor.Bind.
+        /// </summary>
+        internal static string BindTagHelper_Fallback_DisplayName {
+            get {
+                return ResourceManager.GetString("BindTagHelper_Fallback_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Binds the provided expression to an attribute and a change handler, based on the naming of the bind attribute. For example: &lt;code&gt;bind-value-changed=&quot;...&quot;&lt;/code&gt; will assign the current value of the expression to the &apos;value&apos; attribute, and assign a delegate that attempts to set the value to the &apos;changed&apos; attribute..
+        /// </summary>
+        internal static string BindTagHelper_Fallback_Documentation {
+            get {
+                return ResourceManager.GetString("BindTagHelper_Fallback_Documentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Declares an interface implementation for the current document..
         /// </summary>
         internal static string ImplementsDirective_Description {
